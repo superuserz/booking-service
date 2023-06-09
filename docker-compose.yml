@@ -1,0 +1,17 @@
+version: "3.6"
+
+networks:
+    ucpnetwork:
+    
+services: 
+
+    booking-service: 
+        image: docker.io/manmeetdevgun/booking-service:latest
+        ports:
+                - 8080:8080
+        environment:
+                - JAVA_OPTS=-Xmx512m -Xms512m
+                - server.port=8080
+                
+        networks:
+                - ucpnetwork
