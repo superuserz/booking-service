@@ -19,6 +19,15 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
+        envFrom:
+        - configMapRef:
+           name: booking-service-config
+        env:
+        - name: DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: booking-service-secret
+              key: DATABASE_PASSWORD
 ---
 apiVersion: v1
 kind: Service

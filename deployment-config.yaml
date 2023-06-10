@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: booking-service-config
+  namespace: nagp-assignment
+data:
+  DATABASE_SERVER: booking-service-db
+  APPLICATION_DESCRIPTION: "Booking Service Deployed on AKS Cluster"
