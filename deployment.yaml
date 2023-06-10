@@ -1,48 +1,55 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: booking-service
+  name: springboot-crud-deployment
   namespace: nagp-assignment
 spec:
-  replicas: 1
   selector:
     matchLabels:
-      bb: web
+      app: springboot-k8s-mysql
+  replicas: 1
   template:
     metadata:
       labels:
-        bb: web
+        app: springboot-k8s-mysql
     spec:
       containers:
-      - name: booking-service
-        image: manmeetdevgun/booking-service
-        imagePullPolicy: Always
-        ports:
-        - containerPort: 8080
-        envFrom:
-        - configMapRef:
-           name: booking-service-config
-        env:
-        - name: DATABASE_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: booking-service-secret
-              key: DATABASE_PASSWORD
+        - name: springboot-crud-k8s
+          image: manmeetdevgun/booking-service:latest
+          ports:
+            - containerPort: 8080
+          env:   # Setting Enviornmental Variables
+
+            - name: DATABASE_SERVER  # Setting Database name from configMap
+              valueFrom :
+                configMapKeyRef :
+                  name : booking-service-config
+                  key :  DATABASE_SERVER
+                  
+            - name: DATABASE_USERNAME  # Setting Database name from configMap
+              valueFrom :
+                configMapKeyRef :
+                  name : booking-service-config
+                  key :  DATABASE_USERNAME
+
+            - name: DATABASE_PASSWORD  # Setting Database username from Secret
+              valueFrom :
+                secretKeyRef :
+                  name : booking-service-secret
+                  key :  DATABASE_PASSWORD
+
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    bb: web
-    name: booking-service
-  name: booking-service
+
+apiVersion: v1 # Kubernetes API version
+kind: Service # Kubernetes resource kind we are creating
+metadata: # Metadata of the resource kind we are creating
+  name: springboot-crud-svc
   namespace: nagp-assignment
 spec:
-  type: LoadBalancer
   selector:
-    bb: web
+    app: springboot-k8s-mysql
   ports:
-  - name: http
-    port: 80
-    protocol: TCP
-    targetPort: 8080
+    - protocol: "TCP"
+      port: 8080 # The port that the service is running on in the cluster
+      targetPort: 8080 # The port exposed by the service
+  type: LoadBalancer # type of the service.
