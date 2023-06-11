@@ -63,6 +63,7 @@ spec:
         - name: mysql-persistent-storage
           persistentVolumeClaim:
             claimName: mysql-pv-claim
+      hostname: mysql
 ---
 
 apiVersion: v1
@@ -80,4 +81,3 @@ spec:
   selector:
     app: mysql
     tier: database
-  clusterIP: None

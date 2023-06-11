@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app: springboot-microservice-deployment
-  replicas: 2
+  replicas: 4
   template:
     metadata:
       labels:
