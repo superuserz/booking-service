@@ -19,6 +19,7 @@ Other Details
 5. Persistent volume claim has been setup for MYSQL Service which will allow Data to be saved in DB even if POD is recreated.
 6. Database password has been stored as secret (Base 64 encoded).
 7. POD IPs are NOT used for inter-Pod communication
+8. Rolling Updates and Readiness probes have been setup.
 
 
 
