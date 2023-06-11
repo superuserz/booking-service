@@ -9,6 +9,7 @@ URL for service API Tier to view records from backend tier.
 
 http://20.204.187.156:8080/
 http://20.204.187.156:8080/booking/1
+http://20.204.187.156:8080/swagger-ui.html
 
 Other Details
 
