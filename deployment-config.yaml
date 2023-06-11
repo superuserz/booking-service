@@ -4,6 +4,6 @@ metadata:
   name: booking-service-config
   namespace: nagp-assignment
 data:
-  DATABASE_SERVER: mysql
+  DATABASE_SERVER: 10.244.0.14
   DATABASE_USERNAME: root
   APPLICATION_DESCRIPTION: "Booking Service Deployed on AKS Cluster"
